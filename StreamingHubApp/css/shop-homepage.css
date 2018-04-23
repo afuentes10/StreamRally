@@ -8,9 +8,31 @@ body {
   padding-top: 54px;
 }
 
-
 @media (min-width: 992px) {
   body {
     padding-top: 56px;
   }
+}
+
+searchImages {
+    padding-top: 9px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 0px;
+    text-align: center;
+    
+
+}
+
+p1 {
+margin-top: -145px;
+padding-left: 25px;
+padding-bottom: 120px;
+display: block;
+margin-left: 150px;
+
+}
+
+p2 {
+
 }
