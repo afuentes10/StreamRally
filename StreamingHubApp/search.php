@@ -21,6 +21,30 @@ $discover_array = json_decode($discover_json, true);
   <?php
     include_once "head.php"
    ?>
+   <style> 
+   searchImages {
+       padding-top: 9px;
+       padding-right: 30px;
+       padding-bottom: 50px;
+       padding-left: 0px;
+       text-align: center;
+       
+
+   }
+
+   p1 {
+   margin-top: -145px;
+   padding-left: 25px;
+   padding-bottom: 120px;
+   display: block;
+   margin-left: 150px;
+
+   }
+
+   p2 {
+
+   }
+   </style> 
   </head>
 
   <body>
