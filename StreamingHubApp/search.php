@@ -21,6 +21,7 @@ $discover_array = json_decode($discover_json, true);
   <?php
     include_once "head.php"
    ?>
+   <!-- Custom styling for this page --> 
    <style> 
    searchImages {
        padding-top: 9px;
