@@ -1,3 +1,5 @@
+
+
 <?php
 if(!empty($_GET['searchTitle'])){
   $movie_url = 'https://api.themoviedb.org/3/search/movie?api_key=978bf67e41a30cf0d56f7693c187992c&query=' . urlencode($_GET['searchTitle']);
@@ -8,7 +10,7 @@ if(!empty($_GET['searchTitle'])){
  $img_url_prefix = "http://image.tmdb.org/t/p/w500/";
 }
 
-$discover_url='https://api.themoviedb.org/3/discover/movie?api_key=978bf67e41a30cf0d56f7693c187992c';
+$discover_url='https://api.themoviedb.org/3/movie/269149?language=en-US&api_key=978bf67e41a30cf0d56f7693c187992c';
 $discover_json = file_get_contents($discover_url);
 $discover_array = json_decode($discover_json, true);
 
@@ -18,53 +20,59 @@ $discover_array = json_decode($discover_json, true);
 <html lang="en">
 
   <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Stream Rally</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
-    <?php
-      include_once 'head.php';
-    ?>
-    <style>
-    body {
-      background-image: url("images/back.jpg");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      height: 100%;
-      width: 100%;
-    }
-    h1 {
-      color: white;
-    }
-    </style>
+
   </head>
 
   <body>
 
     <!-- Navigation -->
-    <?php
-      include_once 'navbar.php';
-    ?>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.php">Stream Rally</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
 
-    <!-- Search Functionality -->
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="log_in.html">Log In</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
  <div class="container">
  	<div class="jumbotron">
- 		<h3 class="text-center" style = "color: #808080">Search for Any Movie</h3>
- 		<form id="searchForm">
+ 		<h3 class="text-center">Search for Any Movie</h3>
+ 		<form id="searchForm" action="search.php" method="GET">
  			<input type="text" class="form-control" name="searchTitle" placeholder="Search Movie">
       <br/>
-      <?php
-      $s = "";
-      if(!empty($movie_array)){
-    foreach ($movie_array['results'] as $results) {
-      #echo <'img src="'.$image['page'][1]['results']['poster_path'].'"alt=""/>';
-      $s.="<h2> $results[original_title]</h2>";
-      $s.="<p class= 'img'><img src=$img_url_prefix.$results[poster_path] height=150 width = 100/> </p>";
-      $s.="<p>Rating: $results[vote_average]/10</p>";
-      $s.="<p>$results[overview]</p>";
-    }
-    echo $s;
-    }
-
-      ?>
  		</form>
  	</div>
  </div>
@@ -112,7 +120,20 @@ $discover_array = json_decode($discover_json, true);
 
 ?>
             <div class="carousel-item active">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+              <?php
+              if(!empty($discover_array)){
+              foreach ($discover_array['results'] as $results){
+
+
+              $s.="<img class='d-block img-fluid' src=$img_url_prefix.$results[poster_path] alt='First slide'>";
+            }
+          }
+              echo $s;
+
+
+
+              ?>
+
               </div>
               <div class="carousel-item">
                 <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
@@ -243,10 +264,16 @@ $discover_array = json_decode($discover_json, true);
     <!-- /.container -->
 
     <!-- Footer -->
-    <?php
-     include_once 'footer.php';
-    ?>
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; StreamRally 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
 
