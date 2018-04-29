@@ -19,14 +19,21 @@
       <div style = "padding-left: 20%; padding-right: 20%; text-align: center;">
         <h2 style = "font-family: Verdana"> Welcome Back! </h2>
         <br>
-      <form>
+<?php
+if (isset($_GET['login']) && $_GET['login'] == 'error') {
+  echo "<div class='alert alert-danger'>
+  Invalid user or password. Please try again. 
+</div>";
+}
+?>
+      <form action = "includes/login_inc.php" method = "post">
         <div class="form-group">
           <input type = "text" class="form-control" name = "uid" placeholder = "Username/e-mail" required>
         </div>
         <div class="form-group">
           <input type="password" class="form-control" name = "pwd" placeholder = "Password" required>
         </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" name = "submit" class="btn btn-default">Submit</button>
      </form>
     <br>
       <p> Don't have an account? <a href="sign_up.php"> Sign up here. </a> </p>
