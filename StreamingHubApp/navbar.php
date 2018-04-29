@@ -17,9 +17,28 @@
         <li class="nav-item">
           <a class="nav-link" href="contact.php">Contact</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="log_in.php">Log In</a>
-        </li>
+        <?php
+        if (isset($_SESSION['u_id'])) {
+          echo "<li class='nav-item'>
+            <a class='nav-link' href='forum.php' name = 'forum'>Forum</a>
+          </li>";
+          echo "<li class='nav-item'>
+            <a class='nav-link' href='profile.php?user=$_SESSION[u_uid]'> Profile </a>
+          </li>";
+          echo "<li class='nav-item'>
+            <a class='nav-link' href='includes/logout_inc.php' name = 'logout'>Log Out</a>
+          </li>";
+
+      }
+        else {
+          echo "<li class='nav-item'>
+            <a class='nav-link' href='log_in.php'>Log In</a>
+          </li>";
+          echo "<li class='nav-item'>
+            <a class='nav-link' href='sign_up.php'>Sign up</a>
+          </li>";
+        }
+?>
       </ul>
     </div>
   </div>
