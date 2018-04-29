@@ -20,52 +20,33 @@ $discover_array = json_decode($discover_json, true);
 <html lang="en">
 
   <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Stream Rally</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="css/shop-homepage.css" rel="stylesheet">
+    
+    <?php
+      include_once 'head.php';
+    ?>
+    <style>
+    body {
+      background-image: url("images/back.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      height: 100%;
+      width: 100%;
+    }
+    h1 {
+      color: white;
+    }
+    </style>
 
   </head>
 
   <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.php">Stream Rally</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link" href="services.html">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="log_in.html">Log In</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <?php
+      include_once 'navbar.php';
+    ?>
 
  <div class="container">
  	<div class="jumbotron">
@@ -89,9 +70,26 @@ $discover_array = json_decode($discover_json, true);
 
           <h1 class="my-4">Stream Rally</h1>
           <div class="list-group">
-            <a href="#" class="list-group-item">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
+            <?php
+$genre_url='https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=978bf67e41a30cf0d56f7693c187992c';
+$genre_json = file_get_contents($genre_url);
+$genre_array = json_decode($genre_json, true);
+
+
+
+$s = "";
+
+foreach ($genre_array['genres'] as $results) {
+  $genre_name="$results[id]";
+$s.="<a href='$results[name].php' name=$genre_name class='list-group-item'>$results[name]</a>";
+
+}
+
+echo $s;
+
+
+?>
+
           </div>
 
         </div>
@@ -108,38 +106,14 @@ $discover_array = json_decode($discover_json, true);
 
 
             <div class="carousel-inner" role="listbox">
-<?php
-#if(!empty($discover_array)){
-#foreach ($movie_array['results'] as $results){
-#  <div class="carousel-item active">
-#   class= "d-block img-fluid"><img src=$img_url_prefix.$results[poster_path];
-#  </div>
-#}
-
-#}
-
-?>
-            <div class="carousel-item active">
-              <?php
-              if(!empty($discover_array)){
-              foreach ($discover_array['results'] as $results){
-
-
-              $s.="<img class='d-block img-fluid' src=$img_url_prefix.$results[poster_path] alt='First slide'>";
-            }
-          }
-              echo $s;
-
-
-
-              ?>
-
+              <div class="carousel-item active">
+                <img class="d-block img-fluid" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/sM33SANp9z6rXW8Itn7NnG1GOEs.jpg" alt="Zootopia" class="center">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+                <img class="d-block img-fluid" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="Avengers Infinity War">
               </div>
               <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+                <img class="d-block img-fluid" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/30oXQKwibh0uANGMs0Sytw3uN22.jpg" alt="Rampage">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -156,14 +130,14 @@ $discover_array = json_decode($discover_json, true);
 
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="#"><img class="card-img-top" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/sM33SANp9z6rXW8Itn7NnG1GOEs.jpg" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">Item One</a>
+                    <a href="#">Zootopia</a>
                   </h4>
                   <h5>$24.99</h5>
 
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -173,13 +147,13 @@ $discover_array = json_decode($discover_json, true);
 
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="#"><img class="card-img-top" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">Item Two</a>
+                    <a href="#">Avengers Infinity War</a>
                   </h4>
                   <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -189,13 +163,13 @@ $discover_array = json_decode($discover_json, true);
 
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="#"><img class="card-img-top" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/30oXQKwibh0uANGMs0Sytw3uN22.jpg" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">Item Three</a>
+                    <a href="#">Rampage</a>
                   </h4>
                   <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -205,13 +179,13 @@ $discover_array = json_decode($discover_json, true);
 
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="#"><img class="card-img-top" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/uxzzxijgPIY7slzFvMotPv8wjKA.jpg" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">Item Four</a>
+                    <a href="#">Black Panther</a>
                   </h4>
                   <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -221,13 +195,13 @@ $discover_array = json_decode($discover_json, true);
 
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="#"><img class="card-img-top" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/coss7RgL0NH6g4fC2s5atvf3dFO.jpg" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">Item Five</a>
+                    <a href="#">The Maze Runner</a>
                   </h4>
                   <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -237,13 +211,13 @@ $discover_array = json_decode($discover_json, true);
 
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                <a href="#"><img class="card-img-top" src="https://image.tmdb.org/t/p/w185_and_h278_bestv2/tWqifoYuwLETmmasnGHO7xBjEtt.jpg" alt=""></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">Item Six</a>
+                    <a href="#">Beauty and the Beast</a>
                   </h4>
                   <h5>$24.99</h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -270,10 +244,6 @@ $discover_array = json_decode($discover_json, true);
       </div>
       <!-- /.container -->
     </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
 
