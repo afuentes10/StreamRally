@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
       else {
         //Check if email is valid
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          header("Location: ../sign_up.php?signup=email");
+          header("Location: ../sign_up.php?signup=email_Invalid");
           exit();
         }
         else {
@@ -32,7 +32,11 @@ if (isset($_POST['submit'])) {
           $result = mysqli_query($conn, $sql);
           $resultCheck = mysqli_num_rows($result);
 
-          if ($resultCheck > 0) {
+          $sql2 = "SELECT * FROM users WHERE user_email='$email'";
+          $result2 = mysqli_query($conn, $sql2);
+          $resultCheck2 = mysqli_num_rows($result2);
+
+          if ($resultCheck > 0 || $resultCheck2 > 0) {
             header("Location: ../sign_up.php?signup=usertaken");
             exit();
           }
